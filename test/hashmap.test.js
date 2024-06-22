@@ -1,7 +1,5 @@
 import HashMap from '../src/module/hash_table/map.mjs';
-import Hash from '../src/module/helpers/hash_code.mjs';
 
-const CAPACITY = 16;
 const table = HashMap();
 const klein = {
     key: 'Klein',
@@ -52,7 +50,7 @@ describe('Test hashmap', () => {
         table.set(klein.key, klein.value);
         table.set(klein2.key, klein2.value);
 
-        expect(table.buckets.length).not.toEqual(16);
+        expect(table.capacity).not.toEqual(16);
     });
 
     test('Get an key and return the value of the key; if no key is found return null', () => {
@@ -60,6 +58,13 @@ describe('Test hashmap', () => {
 
         expect(table.get(klein.key)).toBe(klein.value);
         expect(table.get('Audrey')).toBeNull();
+    });
+
+    test('Check if an key exist in the hash map', () => {
+        table.set(klein.key, klein.value);
+
+        expect(table.has(klein.key)).toBeTruthy();
+        expect(table.has('Audrey')).toBeFalsy();
     });
 
     test('Remove an key in the hashmap', () => {
@@ -149,8 +154,6 @@ describe('Test hashmap', () => {
             expect(values.includes(value)).toBeTruthy();
         }
 
-        for (const entry of table.entries()) {
-            expect(Array.isArray(entry)).toBeTruthy();
-        }
+        expect(Array.isArray(table.entries())).toBeTruthy();
     });
 });
