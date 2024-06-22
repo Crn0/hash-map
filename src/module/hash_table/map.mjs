@@ -1,5 +1,5 @@
 import LinkedList from '../linked_list/linked_list.mjs';
-
+import { assert } from 'node:console'
 const INITIAL_CAPACITY = 16;
 const LOAD_FACTOR = 0.75;
 
@@ -9,18 +9,31 @@ function HashMap() {
     const loadFactor = LOAD_FACTOR;
 
     const hash = (key) => {
-        if (key < 0 || key >= buckets.length) {
-            throw new Error('Trying to access index out of bound');
+        try {
+            const primeNumber = 31;
+            let hashCode = 0;
+
+            assert(typeof key === 'string', `receive typeof ${typeof key}: expected typeof string`)
+
+            if (key < 0 || key >= buckets.length) {
+                throw new Error('Trying to access index out of bound');
+            }
+
+            if (typeof key !== 'string') {
+                throw new Error(
+                    `receive typeof ${typeof key}: expected typeof string`
+                );
+            }
+
+            for (let i = 0; i < key.length; i += 1) {
+                hashCode =
+                    primeNumber * hashCode + (key.charCodeAt(i) % CAPACITY);
+            }
+
+            return hashCode % CAPACITY;
+        } catch (error) {
+            console.error(error);
         }
-
-        let hashCode = 0;
-        const primeNumber = 31;
-
-        for (let i = 0; i < key.length; i += 1) {
-            hashCode = primeNumber * hashCode + (key.charCodeAt(i) % CAPACITY);
-        }
-
-        return hashCode % CAPACITY;
     };
 
     const set = (key, value) => {
