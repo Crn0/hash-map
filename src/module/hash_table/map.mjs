@@ -64,9 +64,8 @@ function HashMap() {
                 tempNode.next = node;
 
                 if (loadFactorReached()) {
-                    resize();
-
-                    return;
+                    console.log(value)
+                    return resize();
                 }
 
                 return {
@@ -79,9 +78,7 @@ function HashMap() {
         buckets[hashCode] = node;
 
         if (loadFactorReached()) {
-            resize();
-
-            return;
+            return resize();
         }
 
         return {
@@ -112,6 +109,8 @@ function HashMap() {
                 tempNode = tempNode.next;
             }
         });
+
+        return CAPACITY
     };
 
     const get = (key) => {
@@ -245,9 +244,6 @@ function HashMap() {
     };
 
     return Object.freeze({
-        get buckets() {
-            return buckets;
-        },
         hash,
         set,
         get,

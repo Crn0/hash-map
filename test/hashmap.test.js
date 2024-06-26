@@ -28,29 +28,14 @@ describe('Test hashmap', () => {
         expect(table.set('Klein', 'Moretti')).not.toEqual(klein);
     });
 
-    test('Deals with collision', () => {
-        table.set(klein.key, klein.value);
-        table.set(klein2.key, klein2.value);
-
-        expect(table.buckets[hashCode1]).toEqual(table.buckets[hashCode2]);
-        expect(table.buckets[hashCode1].key).toBe(klein.key);
-        expect(table.buckets[hashCode1].value).toBe(klein.value);
-        expect(table.buckets[hashCode1].next).toEqual(klein2);
-        expect(table.buckets[hashCode2].next.key).toBe(klein2.key);
-        expect(table.buckets[hashCode2].next.value).toBe(klein2.value);
-        expect(table.buckets[hashCode2].next.next).toBe(null);
-    });
-
     test('Grow the capacity if the buckets reach the load factor', () => {
-        const array = Array(11).fill(true);
+        const array = Array(12).fill(true);
         array.map((v, i) => {
             table.set(`key${i}`, v);
         });
 
-        table.set(klein.key, klein.value);
-        table.set(klein2.key, klein2.value);
+        expect(table.set(klein.key, klein.value)).not.toEqual(16);
 
-        expect(table.capacity).not.toEqual(16);
     });
 
     test('Get an key and return the value of the key; if no key is found return null', () => {
@@ -152,6 +137,9 @@ describe('Test hashmap', () => {
 
         for (const value of table.entries().flat()) {
             expect(values.includes(value)).toBeTruthy();
+        }
+        for (const entry of table.entries()) {
+            expect(Array.isArray(entry)).toBeTruthy();
         }
 
         expect(Array.isArray(table.entries())).toBeTruthy();

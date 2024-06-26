@@ -1,5 +1,3 @@
-
-
 const resize = (buckets, CAPACITY) => {
     const oldBuckets = structuredClone(buckets);
 
