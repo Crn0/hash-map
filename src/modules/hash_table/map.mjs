@@ -25,8 +25,6 @@ class HashMap {
         bucket.append(key, value);
         this.#size += 1;
 
-        // console.log(newValue, key, value)
-
         if (this.#loadFactorReached()) {
             this.#resize();
         }
