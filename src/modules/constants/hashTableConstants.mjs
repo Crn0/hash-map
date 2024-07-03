@@ -1,0 +1,4 @@
+const INITIAL_CAPACITY = 16;
+const LOAD_FACTOR = 0.75;
+
+export { INITIAL_CAPACITY, LOAD_FACTOR };
