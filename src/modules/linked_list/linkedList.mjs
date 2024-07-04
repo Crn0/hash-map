@@ -2,12 +2,12 @@ import Node from './node.mjs';
 import assert from 'node:assert';
 
 class LinkedList {
-    #root = new Node();
-
-    constructor() {}
+    constructor() {
+        this.root = new Node();
+    }
 
     append(key, value) {
-        let node = this.#root;
+        let node = this.root;
         if (node.key === null) {
             node.key = key;
             node.value = value;
@@ -22,7 +22,7 @@ class LinkedList {
     }
 
     has(key) {
-        let node = this.#root;
+        let node = this.root;
 
         while (node) {
             if (node.key === key) return true;
@@ -34,7 +34,7 @@ class LinkedList {
     }
 
     updateValue(key, value) {
-        let node = this.#root;
+        let node = this.root;
 
         while (node) {
             if (node.key === key) break;
@@ -48,7 +48,7 @@ class LinkedList {
     }
 
     get(key) {
-        let node = this.#root;
+        let node = this.root;
 
         while (node) {
             if (node.key === key) {
@@ -67,11 +67,11 @@ class LinkedList {
     }
 
     removeNode(key) {
-        let node = this.#root;
+        let node = this.root;
         let prev = node;
 
         if (node.key === key) {
-            this.#root = node.next;
+            this.root = node.next;
 
             return;
         }
@@ -89,7 +89,7 @@ class LinkedList {
     }
 
     keys() {
-        let temp = this.#root;
+        let temp = this.root;
         const array = [];
 
         while (temp) {
@@ -104,7 +104,7 @@ class LinkedList {
     }
 
     values() {
-        let temp = this.#root;
+        let temp = this.root;
         const array = [];
 
         while (temp) {
@@ -119,7 +119,7 @@ class LinkedList {
     }
 
     entries() {
-        let temp = this.#root;
+        let temp = this.root;
         const array = [];
 
         while (temp) {

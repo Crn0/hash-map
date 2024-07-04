@@ -199,4 +199,3 @@ assert.deepEqual(test.values().length, 13, 'There is no values in the hashmap');
 test.clear();
 
 assert.deepEqual(test.length(), 0, 'There are still values in the HashMap');
-
